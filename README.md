@@ -1,6 +1,6 @@
 # TBNL
 ## Targeted Bayesian Network Learning
-### The TBNL builds a BN classifier and saves the resultsted network onto a file which can be viewed by GeNIe framework.
+### The TBNL builds a BN classifier and saves the resulted network onto a file which can be viewed by GeNIe framework.
 ### Generally speaking, Bayesian network learning has two learning stages: structure learning (the graph) and parameter learning (the probability distributions).
 ### GeNIe is a third party app. There are several ways for licensing GeNIe and this is on the user's responsibility.
 ### Using GeNIe is not mandatory, but then the user would have to modify the code to their needs, as the parameter learning stage is tailored for GeNIe.
