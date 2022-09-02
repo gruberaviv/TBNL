@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pickle as pkl
 from feature_selection_from_counts import feature_selection_from_counts
-from marg_prob import margprob
+from marg_prob import margprob, rows_in_a1_that_are_in_a2
 import networkx as nx
 import pandas as pd
 from entropy_from_counts import flatten_list
@@ -9,10 +9,6 @@ import numpy as np
 from discretize_by_MI import discretize_by_mi, discretize
 import os
 from itertools import product
-
-
-def rows_in_a1_that_are_in_a2(a1, a2):
-    return a1.reset_index().merge(a2, how='inner').set_index('index').index.to_list()
 
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
