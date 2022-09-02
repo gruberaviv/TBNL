@@ -2,7 +2,7 @@
 """
 Created on Thu Jul 19 15:33:14 2018
 
-@author: a00408194
+@author: Aviv Gruber
 """
 
 from marg_prob import rows_in_a1_that_are_in_a2
