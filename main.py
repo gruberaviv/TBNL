@@ -10,9 +10,9 @@ if __name__ == '__main__':
     constraints['rest_max_features'] = max_features
     constraints['min_info_gain'] = 0.01
     constraints['rest_min_info_gain'] = 0.05
-    filename = 'data.csv'
+    filename = '/Users/aviv.gruber/dev/TBNL/Dataset_filtered for case 1_sample_1k.csv'
     df = pd.read_csv(filename)
-    target = "class colname"
+    target = "wh_OI_bound_ratio"
     columns_to_remove = ["id"]
     columns_to_process = []
     for column in df.columns:
@@ -34,11 +34,11 @@ if __name__ == '__main__':
     columns_to_process+=[target]
     
     print(f'''*******************************
-******** Starting TBNL for case {case} ********
+******** Starting TBNL ********
 ******************************''')
     print('Target = ', target)
     # Learn only parents
-    # _, graph = learn_tbnl_graph_from_counts(data=df[columns_to_process], counts=None, constraints=constraints, target=target, family="nuclear", MC=0)
+    _, graph = learn_tbnl_graph_from_counts(data=df[columns_to_process], counts=None, constraints=constraints, target=target, family="nuclear", MC=0)
     features = list(graph.predecessors(target))
     # nuclear family to nuclear power
     # Learn grandparents

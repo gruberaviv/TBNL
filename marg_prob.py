@@ -9,6 +9,9 @@ from os import name
 import numpy as np
 import pandas as pd
 
+def rows_in_a1_that_are_in_a2(a1, a2):
+    return a1.reset_index().merge(a2, how='inner').set_index('index').index.to_list()
+
 def margprob_old(data, counts = None, margin = None): 
     if type(data) == pd.Series:
         data = pd.DataFrame(data)
