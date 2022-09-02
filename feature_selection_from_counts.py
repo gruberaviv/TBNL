@@ -2,6 +2,7 @@
 """
 Created on Sun Jul 22 17:57:23 2018
 
+@author: Aviv Gruber
 """
 
 from entropy_from_counts import *
