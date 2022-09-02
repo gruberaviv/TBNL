@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import pickle as pkl
-from python_scripts.feature_selection_from_counts import feature_selection_from_counts
-from python_scripts.marg_prob import margprob
+from feature_selection_from_counts import feature_selection_from_counts
+from marg_prob import margprob
 import networkx as nx
 import pandas as pd
-from python_scripts.entropy_from_counts import flatten_list
+from entropy_from_counts import flatten_list
 import numpy as np
-from python_scripts.discretize_by_MI import discretize_by_mi, discretize
+from discretize_by_MI import discretize_by_mi, discretize
 import os
 from itertools import product
 
