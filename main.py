@@ -10,9 +10,9 @@ if __name__ == '__main__':
     constraints['rest_max_features'] = max_features
     constraints['min_info_gain'] = 0.01
     constraints['rest_min_info_gain'] = 0.05
-    filename = '/Users/aviv.gruber/dev/TBNL/Dataset_filtered for case 1_sample_1k.csv'
+    filename = 'path_to_file.csv'
     df = pd.read_csv(filename)
-    target = "wh_OI_bound_ratio"
+    target = "target colname"
     columns_to_remove = ["id"]
     columns_to_process = []
     for column in df.columns:
