@@ -10,6 +10,7 @@
 #### TBNL: Gruber, A., & Ben-Gal, I. (2019). A targeted Bayesian network learning for classification. Quality Technology and Quantitative Management, 16(3), 243-261. https://doi.org/10.1080/16843703.2017.1395109
 
 Here is a setup which can be run (only modify the data reading to a specified file, and predetermine the target variable)
+```
 import pandas as pd
 from BN_structure_learning import learn_tbnl_graph_from_counts, write_xdsl_file
 max_features = 3
@@ -53,5 +54,5 @@ features = list(graph.predecessors(target))
 for feature in features:
     features, graph = learn_tbnl_graph_from_counts(data=df[columns_to_process], counts=None, constraints=constraints, target=feature, family="nuclear", G=graph, MC=0)
 write_xdsl_file(dag=graph, data=df, target=target, filename= target+" "+str(max_features)+ f" nuclear power.xdsl")
-
+```
 Footer
