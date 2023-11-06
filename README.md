@@ -61,6 +61,7 @@ write_xdsl_file(dag=graph, data=df, target=target, filename= target+" "+str(max_
 # Param Learning
 my_bn = param_learning(graph, df[columns_to_process])
 df[my_bn['adjmat'].columns].head()
+# Inference
 evidence={}
 inference_bn(my_bn, variables=[target], evidence=evidence)
 ```
