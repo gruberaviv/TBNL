@@ -13,6 +13,9 @@ Here is a setup which can be run (only modify the data reading to a specified fi
 ```
 import pandas as pd
 from BN_structure_learning import learn_tbnl_graph_from_counts, write_xdsl_file
+from bn_parameter_learning import param_learning
+from bn_inference import inference_bn
+
 max_features = 3
 constraints = {}
 constraints['max_features'] = max_features
@@ -54,5 +57,11 @@ features = list(graph.predecessors(target))
 for feature in features:
     features, graph = learn_tbnl_graph_from_counts(data=df[columns_to_process], counts=None, constraints=constraints, target=feature, family="nuclear", G=graph, MC=0)
 write_xdsl_file(dag=graph, data=df, target=target, filename= target+" "+str(max_features)+ f" nuclear power.xdsl")
+
+# Param Learning
+my_bn = param_learning(graph, df[columns_to_process])
+df[my_bn['adjmat'].columns].head()
+evidence={}
+inference_bn(my_bn, variables=[target], evidence=evidence)
 ```
 Footer
