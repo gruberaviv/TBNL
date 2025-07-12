@@ -56,21 +56,27 @@ def cond_entropy_from_counts(data, counts, target = None, MC = 0, xi=None):
         prob = np.asarray(count_cumulated_margin) / sum(np.asanyarray(count_cumulated_margin))
     return sum(x * y for x, y in zip(ent, prob))
 
-def mutual_information_from_counts(data, counts, target, about = None, MC = 0, xi = None):
-  unique_data, unique_count = margprob(data, counts, data.columns, MC)
-  data_4_entropy, _ = margprob(unique_data, unique_count, target, MC)
-  if about is None:
-      print("Mutual information must have two variables (about cannot be null")
-      return None
-  conditioned_colnames = list(set(list(data)) - set(flatten_list([about] + [target])))
-  data_4_condentropy, counts_4_condentropy = margprob(unique_data, unique_count, flatten_list([conditioned_colnames] + [target]), MC)
-  if MC > 0:
-      if xi is None:
-          xi = np.random.rand(MC)
-  H_Y_conditioned_X = cond_entropy_from_counts(data_4_condentropy, counts_4_condentropy, target, MC, xi)
-  H_Y_conditioned_Z_X = cond_entropy_from_counts(data=unique_data, counts=unique_count, target=target, MC=MC, xi=xi)
-  MI = H_Y_conditioned_X - H_Y_conditioned_Z_X
-  return(MI)
+def mutual_information_from_counts(data, counts, target, about = None, MC = 0, xi = None, normalized=True):
+    unique_data, unique_count = margprob(data, counts, data.columns, MC)
+    data_4_entropy, _ = margprob(unique_data, unique_count, target, MC)
+    if about is None:
+        print("Mutual information must have two variables (about cannot be null")
+        return None
+    conditioned_colnames = list(set(list(data)) - set(flatten_list([about] + [target])))
+    data_4_condentropy, counts_4_condentropy = margprob(unique_data, unique_count, flatten_list([conditioned_colnames] + [target]), MC)
+    if MC > 0:
+        if xi is None:
+            xi = np.random.rand(MC)
+    H_Y_conditioned_X = cond_entropy_from_counts(data_4_condentropy, counts_4_condentropy, target, MC, xi)
+    H_Y_conditioned_Z_X = cond_entropy_from_counts(data=unique_data, counts=unique_count, target=target, MC=MC, xi=xi)
+    if normalized:
+        norm_cols = [col for col in data.columns if col != target]
+        data_4_Z_entropy, counts_4_Z_entropy = margprob(unique_data, unique_count, norm_cols, MC)
+        H_Z_conditioned_X = cond_entropy_from_counts(data_4_Z_entropy, counts_4_Z_entropy, target=about, MC=MC, xi=xi)
+        MI = (H_Y_conditioned_X - H_Y_conditioned_Z_X) / (H_Z_conditioned_X + H_Y_conditioned_Z_X)
+    else:
+        MI = H_Y_conditioned_X - H_Y_conditioned_Z_X
+    return(MI)
 
 def flatten_list(the_list):
     flat_list = []
